@@ -51,7 +51,7 @@ Tunggu sampai selesai.
 
 Selanjutnya masukkan perintah
 
-```npm
+```bash
 npm install
 ```
 Tunggu sampai selesai.
@@ -65,6 +65,12 @@ copy .env.example .env
 Selanjutnya masukkan perintah
 
 ```bash
+php artisan key:generate
+```
+
+Dan terakhir masukkan perintah
+
+```bash
 php artisan migrate --seed
 ```
 
@@ -73,14 +79,16 @@ php artisan migrate --seed
 Masukkan perintah berikut
 
 ```bash
-php artisan serve
+php run dev
 ```
 
-Ketik Ctrl+Shift+n pada command prompt untuk membuka command prompt baru, lalu masukkan perintah berikut
+Ketik Ctrl+Shift+2 pada command prompt untuk membuka tab baru, lalu masukkan perintah berikut
 
 ```bash
-npm run dev
+npm artisan serve
 ```
+
+Lalu ketikkan http://127.0.0.1:8000 pada browser atau ctrl+click pada tulisan http://127.0.0.1:8000 pada command prompt
 
 ## Contributing
 
