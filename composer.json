@@ -10,6 +10,8 @@
         "laravel/framework": "^11.0",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
+        "ramsey/uuid": "^4.7",
+        "simplesoftwareio/simple-qrcode": "^4.2",
         "spatie/laravel-permission": "^6.4",
         "tightenco/ziggy": "^2.0"
     },
