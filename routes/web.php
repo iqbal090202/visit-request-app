@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RequestController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
@@ -28,6 +29,8 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('roles', RoleController::class)->middleware(['role:superadmin', 'permission:role-list|role-create|role-edit|role-delete']);
     Route::resource('user', UserController::class)->middleware(['role:superadmin', 'permission:user-list|user-create|user-edit|user-delete']);
+    Route::resource('request', RequestController::class)->middleware(['role:superadmin|admin', 'permission:request-list|request-create|request-edit|request|-cceptance|request-delete']);
+    Route::post('/request/acceptance', [RequestController::class, 'acceptance'])->middleware(['role:superadmin|admin', 'permission:request-acceptance'])->name('request.acceptance');
 });
 
 require __DIR__.'/auth.php';

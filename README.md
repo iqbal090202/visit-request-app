@@ -88,7 +88,7 @@ Ketik Ctrl+Shift+2 pada command prompt untuk membuka tab baru, lalu masukkan per
 npm artisan serve
 ```
 
-Lalu ketikkan http://127.0.0.1:8000 pada browser atau ctrl+click pada tulisan http://127.0.0.1:8000 pada command prompt
+Lalu ketikkan http://127.0.0.1:8000 pada browser atau ctrl+click di tulisan http://127.0.0.1:8000 pada command prompt
 
 ## Contributing
 

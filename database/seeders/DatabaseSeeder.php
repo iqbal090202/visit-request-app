@@ -2,7 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Request;
 use App\Models\User;
+use App\Models\Visitor;
+use Carbon\Carbon;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -20,11 +23,11 @@ class DatabaseSeeder extends Seeder
         'user-create',
         'user-edit',
         'user-delete',
-        'visit-request-list',
-        'visit-request-create',
-        'visit-request-edit',
-        'visit-request-acceptance',
-        'visit-request-delete',
+        'request-list',
+        'request-create',
+        'request-edit',
+        'request-acceptance',
+        'request-delete',
     ];
 
     /**
@@ -52,10 +55,61 @@ class DatabaseSeeder extends Seeder
 
         $role2 = Role::create(['name' => 'admin']);
 
-        $role2->givePermissionTo('visit-request-list');
-        $role2->givePermissionTo('visit-request-create');
-        $role2->givePermissionTo('visit-request-edit');
-        $role2->givePermissionTo('visit-request-acceptance');
-        $role2->givePermissionTo('visit-request-delete');
+        $role2->givePermissionTo('request-list');
+        $role2->givePermissionTo('request-create');
+        $role2->givePermissionTo('request-edit');
+        $role2->givePermissionTo('request-acceptance');
+        $role2->givePermissionTo('request-delete');
+
+
+        // seeder request & visitor
+        $request1 = Request::create([
+            'visit_purpose' => 'Survey',
+            'start_date' => Carbon::now()->format('Y-m-d H:i:s'),
+            'end_date' => Carbon::now()->format('Y-m-d H:i:s'),
+            'description' => 'ini deskripsinya',
+            'status' => 'requested'
+        ]);
+        $visitor1 = Visitor::create([
+            'ktp' => '32712931203123',
+            'name' => 'ibang',
+            'file_ktp' => 'ktp\32712931203123.jpg',
+            'company' => 'PT Ibang',
+            'occupation' => 'CEO',
+            'phone' => '081923819123',
+            'email' => 'ialamsyah92@gmail.com',
+            'pic' => true
+        ]);
+        $request1->visitors()->attach($visitor1->id);
+
+        $request2 = Request::create([
+            'visit_purpose' => 'Meeting',
+            'start_date' => Carbon::now()->format('Y-m-d H:i:s'),
+            'end_date' => Carbon::now()->format('Y-m-d H:i:s'),
+            'description' => 'ini deskripsinya 2',
+            'status' => 'requested'
+        ]);
+        $visitor2 = Visitor::create([
+            'ktp' => '32712931203121',
+            'name' => 'alamsyah',
+            'file_ktp' => 'ktp\32712931203121.jpg',
+            'company' => 'PT Alamsyah',
+            'occupation' => 'Sekretaris',
+            'phone' => '081923819121',
+            'email' => 'sccrlg@gmail.com',
+            'pic' => true
+        ]);
+        $visitor3 = Visitor::create([
+            'ktp' => '32712931203122',
+            'name' => 'sanjaya',
+            'file_ktp' => 'ktp\32712931203122.jpg',
+            'company' => 'PT Alamsyah',
+            'occupation' => 'Sekretaris',
+            'phone' => '081923819121',
+            'email' => 'sanjaya@mail.com',
+            'pic' => false
+        ]);
+        $request2->visitors()->attach($visitor2->id);
+        $request2->visitors()->attach($visitor3->id);
     }
 }
