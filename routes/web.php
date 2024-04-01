@@ -29,7 +29,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('roles', RoleController::class)->middleware(['role:superadmin', 'permission:role-list|role-create|role-edit|role-delete']);
     Route::resource('user', UserController::class)->middleware(['role:superadmin', 'permission:user-list|user-create|user-edit|user-delete']);
-    Route::resource('request', RequestController::class)->middleware(['role:superadmin|admin', 'permission:request-list|request-create|request-edit|request|-cceptance|request-delete']);
+    Route::resource('request', RequestController::class)->middleware(['role:superadmin|admin', 'permission:request-list|request-create|request-edit|request-acceptance|request-delete']);
     Route::post('/request/acceptance', [RequestController::class, 'acceptance'])->middleware(['role:superadmin|admin', 'permission:request-acceptance'])->name('request.acceptance');
 });
 
