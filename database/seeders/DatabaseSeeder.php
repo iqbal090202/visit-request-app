@@ -56,7 +56,7 @@ class DatabaseSeeder extends Seeder
         $role2 = Role::create(['name' => 'admin']);
 
         $role2->givePermissionTo('request-list');
-        $role2->givePermissionTo('request-create');
+        // $role2->givePermissionTo('request-create');
         $role2->givePermissionTo('request-edit');
         $role2->givePermissionTo('request-acceptance');
         $role2->givePermissionTo('request-delete');

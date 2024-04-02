@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreVisitRequest;
 use App\Jobs\AcceptanceJob;
 use App\Mail\AcceptanceMail;
 use App\Models\Request as ModelsRequest;
@@ -45,7 +46,7 @@ class RequestController extends Controller
             ->paginate(10)
             ->onEachSide(2)
             ->appends(request()->query());
-
+        // dd($requests);
         return Inertia::render('Admin/Request/Index', [
             'requests' => $requests,
             'filters' => request()->all('search'),
@@ -63,32 +64,48 @@ class RequestController extends Controller
      */
     public function create()
     {
-        //
+        // dd(Storage::disk('local')->get('spk/1711863172.pdf'));
+        return Inertia::render('Admin/Request/Create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreVisitRequest $request)
     {
-        $requestData = ModelsRequest::create([
-            'visit_purpose' => 'Meeting',
-            'start_date' => Carbon::now()->format('Y-m-d H:i:s'),
-            'end_date' => Carbon::now()->format('Y-m-d H:i:s'),
-            'description' => 'ini deskripsinya',
-        ]);
-        $visitorData = Visitor::create([
-            'ktp' => '32712931203123',
-            'name' => 'ibang',
-            'file_ktp' => 'ktp\32712931203123.jpg',
-            'company' => 'PT Ibang',
-            'occupation' => 'CEO',
-            'phone' => '081923819123',
-            'email' => 'ibang@mail.com',
-            'pic' => true
-        ]);
+        // dd($request->only('start_date', 'end_date'));
+        $spkName = null;
+        if ($request->hasFile('spk')) {
+            $spkName = time().'.'.$request->spk->extension();
+            // Storage::disk('public')->putFile('/file/spk/' . $spkName, $request->spk);
+            $request->spk->storeAs('spk', $spkName);
+        }
 
-        $requestData->visitors()->attach($visitorData->id);
+        $requestData = ModelsRequest::create([
+            'visit_purpose' => $request->visit_purpose,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+            'description' => $request->description,
+            'spk' => $spkName
+        ]);
+        foreach ($request->visitors as $key => $visitor) {
+            $ktpName = null;
+            $ktpName = time().'.'.$visitor['file_ktp']->extension();
+            $visitor['file_ktp']->storeAs('ktp', $ktpName);
+
+            $visitorData = Visitor::create([
+                'ktp' => $visitor['ktp'],
+                'name' => $visitor['name'],
+                'file_ktp' => $ktpName,
+                'company' => $visitor['company'],
+                'occupation' => $visitor['occupation'],
+                'phone' => $visitor['phone'],
+                'email' => $visitor['email'],
+                'pic' => $key == 0
+            ]);
+
+            $requestData->visitors()->attach($visitorData->id);
+        }
 
         return redirect()->route('request.index')->with('message', __('Request created successfully.'));
     }
@@ -116,7 +133,7 @@ class RequestController extends Controller
 
         AcceptanceJob::dispatch($pic->email, $action, $filename);
 
-        return redirect()->route('request.index')->with('message', __('Request ' . $action . 'successfully.'));
+        return redirect()->route('request.index')->with('message', __('Request ' . $action . ' successfully.'));
     }
 
     /**

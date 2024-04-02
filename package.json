@@ -25,6 +25,7 @@
         "@fortawesome/fontawesome-svg-core": "^6.5.1",
         "@fortawesome/free-solid-svg-icons": "^6.5.1",
         "@fortawesome/vue-fontawesome": "^3.0.6",
+        "@vuepic/vue-datepicker": "^8.3.1",
         "datatables.net": "^2.0.2",
         "datatables.net-dt": "^2.0.2",
         "datatables.net-vue3": "^3.0.1"

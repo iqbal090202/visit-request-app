@@ -63,7 +63,7 @@ function acceptance(id, action) {
                 main
             >
                 <BaseButton
-                    v-if="can.delete"
+                    v-if="can.create"
                     :route-name="route('request.create')"
                     :icon="mdiPlus"
                     label="Add"
