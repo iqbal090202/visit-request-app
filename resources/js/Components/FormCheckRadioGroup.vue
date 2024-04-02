@@ -45,7 +45,7 @@ const computedValue = computed({
       v-model="computedValue"
       :type="type"
       :name="name"
-      :input-value="key"
+      :input-value="value"
       :label="value"
       :class="componentClass"
     />

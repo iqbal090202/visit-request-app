@@ -1,4 +1,6 @@
 import "../css/main.css";
+import "@vuepic/vue-datepicker/dist/main.css";
+import "../css/custom-datepicker.css";
 
 import { createPinia } from "pinia";
 import { useStyleStore } from "@/Stores/style.js";
