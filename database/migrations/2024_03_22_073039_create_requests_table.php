@@ -20,7 +20,7 @@ return new class extends Migration
             $table->text('description');
             $table->string('spk')->nullable();
             $table->string('qrcode')->nullable();
-            $table->enum('status', ['requested', 'accepted', 'rejected', 'finished'])->default('requested');
+            $table->enum('status', ['requested', 'accepted', 'rejected', 'finished', 'missed'])->default('requested');
             $table->timestamps();
         });
 

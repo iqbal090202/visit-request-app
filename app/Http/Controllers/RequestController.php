@@ -10,6 +10,7 @@ use App\Models\Visitor;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -113,10 +114,23 @@ class RequestController extends Controller
     public function acceptance(Request $request)
     {
         $requestData = ModelsRequest::find($request->id);
+        $startDate = Carbon::parse($requestData->start_date)->timezone('UTC');
+        $endDate = Carbon::parse($requestData->end_date)->timezone('UTC');
+        $requestThisDay = ModelsRequest::where('status', 'accepted')
+            ->whereDate('start_date', $startDate->toDateString())
+            ->whereTime('end_date', '>=', $startDate->toTimeString())
+            ->whereTime('start_date', '<=', $endDate->toTimeString())
+            ->count();
         $filename = '';
         $action = $request->action . 'ed';
 
         if ($action == 'accepted') {
+            if ($requestThisDay > 0) {
+                return redirect()->route('request.index')
+                    ->with('message', __('Request Bentrok.'))
+                    ->with('color', 'warning');
+            }
+
             $qrCode = QrCode::format('png')->size(256)->generate($requestData->uuid);
             $filename = '/img/qr-code/img-' . time() . '.png';
             Storage::disk('public')->put($filename, $qrCode);
