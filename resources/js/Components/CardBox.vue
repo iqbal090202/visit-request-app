@@ -1,6 +1,6 @@
 <script setup>
-import { mdiCog } from '@mdi/js'
-import { computed, useSlots } from 'vue'
+import { mdiChevronDown, mdiChevronRight } from '@mdi/js'
+import { computed, useSlots, ref } from 'vue'
 import BaseIcon from '@/Components/BaseIcon.vue'
 
 const props = defineProps({
@@ -27,6 +27,8 @@ const props = defineProps({
   modal: Boolean
 })
 
+const show = ref(true)
+
 const emit = defineEmits(['header-icon-click', 'submit'])
 
 const is = computed(() => props.form ? 'form' : 'div')
@@ -48,10 +50,11 @@ const componentClass = computed(() => {
   return base
 })
 
-const computedHeaderIcon = computed(() => props.headerIcon ?? mdiCog)
+const computedHeaderIcon = computed(() => props.headerIcon ?? show.value ? mdiChevronDown : mdiChevronRight)
 
 const headerIconClick = () => {
   emit('header-icon-click')
+  show.value = !show.value
 }
 
 const submit = e => {
@@ -94,12 +97,13 @@ const submit = e => {
     >
       <p>Nothing's here…</p>
     </div>
-    <div
-      v-else
-      class="flex-1"
-      :class="{'p-6':!hasTable}"
-    >
-      <slot />
+    <div v-else class="cardbox-container">
+        <div
+            class="flex-1 cardbox-body"
+            :class="{'p-6':!hasTable, 'show':show }"
+        >
+            <slot />
+        </div>
     </div>
     <div
       v-if="footer"
@@ -109,3 +113,18 @@ const submit = e => {
     </div>
   </component>
 </template>
+<style scoped>
+.cardbox-container {
+    overflow: hidden;
+}
+.cardbox-body.show {
+    margin-top: 0;
+}
+.cardbox-body {
+    margin-top: -150vh;
+    transition: all 1s;
+}
+@media (min-width: 1024px) {
+    margin-top: -100%;
+}
+</style>

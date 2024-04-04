@@ -45,12 +45,6 @@ function acceptance(id, action) {
         formAccaptance.post(route(`request.acceptance`, { id, action }));
     }
 }
-
-// function reject(id) {
-//     if (confirm("Are you sure you want to reject this request?")) {
-//         formAccaptance.post(route("request.reject", id));
-//     }
-// }
 </script>
 
 <template>
@@ -75,7 +69,7 @@ function acceptance(id, action) {
             <NotificationBar
                 :key="Date.now()"
                 v-if="$page.props.flash.message"
-                color="success"
+                :color="$page.props.flash.color == null ? 'success' : $page.props.flash.color"
                 :icon="mdiAlertBoxOutline"
             >
                 {{ $page.props.flash.message }}
