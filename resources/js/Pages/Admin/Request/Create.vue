@@ -18,7 +18,7 @@ const form = useForm({
     end_date: new Date(),
     description: "haloo",
     spk: null,
-    visitors: []
+    visitors: [],
 });
 
 const initialVisitor = {
@@ -29,6 +29,7 @@ const initialVisitor = {
     occupation: "CEO",
     phone: "08192381231",
     email: "ias@asd.sad",
+    show: true,
 };
 
 const dataVisitors = reactive([initialVisitor]);
@@ -42,12 +43,14 @@ const addVisitor = () => {
         occupation: "",
         phone: "",
         email: "",
+        show: true,
     });
 };
 
-const deleteVisitor = (index) => {
-    dataVisitors.splice(index, 1);
-};
+const toggleShowVisitor = (index) =>
+    (dataVisitors[index].show = !dataVisitors[index].show);
+
+const deleteVisitor = (index) => dataVisitors.splice(index, 1);
 
 const submit = () => {
     form.visitors = dataVisitors;
@@ -87,6 +90,7 @@ const submit = () => {
                     :visitors="dataVisitors"
                     @add="addVisitor"
                     @delete="deleteVisitor"
+                    @toggleShow="toggleShowVisitor"
                 />
 
                 <template #footer>

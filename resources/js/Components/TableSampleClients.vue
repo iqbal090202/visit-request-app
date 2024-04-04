@@ -11,14 +11,25 @@ import BaseButton from '@/Components/BaseButton.vue'
 import UserAvatar from '@/Components/UserAvatar.vue'
 
 defineProps({
-  checkable: Boolean
+  checkable: Boolean,
 })
 
 const styleStore = useStyleStore()
 
 const mainStore = useMainStore()
 
-const items = computed(() => mainStore.clients)
+const dataClients = [
+    {
+        id: 1,
+        name: "Ibang",
+        company: "PT IBANG",
+        city: "Bandung",
+        Progress: "50%",
+        Created: new Date()
+    }
+]
+
+const items = computed(() => dataClients)
 
 const isModalActive = ref(false)
 
@@ -150,7 +161,7 @@ const checked = (isChecked, client) => {
             {{ client.progress }}
           </progress>
         </td>
-        <td 
+        <td
           data-label="Created"
           class="lg:w-1 whitespace-nowrap"
         >

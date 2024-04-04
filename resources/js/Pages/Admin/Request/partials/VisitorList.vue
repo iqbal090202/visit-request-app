@@ -2,6 +2,7 @@
 import {
     mdiArrowLeftBoldOutline,
     mdiChevronDown,
+    mdiChevronRight,
     mdiTrashCanOutline,
 } from "@mdi/js";
 import BaseButton from "@/Components/BaseButton.vue";
@@ -24,19 +25,11 @@ const { form } = defineProps({
     },
 });
 
-const emit = defineEmits(["add", "delete"]);
+const emit = defineEmits(["add", "delete", "toggleShow"]);
 const visitorErrors = computed(() => {
     return Object.keys(form.errors).map((item) => item.replaceAll(".", " "));
 });
 
-const toggleCollapse = (index) => {
-    const el = itemRefs.value[index].querySelector(".visitor-list");
-    if (el.classList.contains("show")) {
-        el.classList.remove("show");
-    } else {
-        el.classList.add("show");
-    }
-};
 </script>
 <template>
     <div class="flex justify-between">
@@ -64,14 +57,14 @@ const toggleCollapse = (index) => {
             "
         >
             <div
-                @click="toggleCollapse(index)"
+                @click="emit('toggleShow', index)"
                 class="flex items-center cursor-pointer"
                 :class="
                     visitorErrors.some((item) => item.includes(index)) &&
                     'text-red-400'
                 "
             >
-                <BaseIcon :path="mdiChevronDown" />
+                <BaseIcon :path="visitor.show ? mdiChevronDown : mdiChevronRight" />
                 <span>
                     Visitor {{ index + 1 }}
                     <span v-if="index === 0">(PIC)</span>
@@ -87,7 +80,7 @@ const toggleCollapse = (index) => {
         </div>
 
         <div class="visitor-container">
-            <div :id="`visitorList-${index}`" class="visitor-list show">
+            <div :id="`visitorList-${index}`" class="visitor-list" :class="visitor.show && 'show'">
                 <FormField
                     label="KTP *"
                     :class="{
@@ -247,7 +240,7 @@ const toggleCollapse = (index) => {
     margin-top: 0;
 }
 .visitor-list {
-    margin-top: -100%;
+    margin-top: -100vh;
     transition: all 1s;
 }
 </style>

@@ -15,6 +15,7 @@
         "axios": "^1.6.4",
         "laravel-vite-plugin": "^1.0",
         "lodash": "^4.17.21",
+        "numeral": "^2.0.6",
         "pinia": "^2.1.7",
         "postcss": "^8.4.31",
         "tailwindcss": "^3.2.1",

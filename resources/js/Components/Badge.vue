@@ -21,15 +21,20 @@ const componentClass = computed(() => {
         darkBgColor = "dark:bg-red-900";
         darkTextColor = "dark:text-red-300";
     } else if (props.data === "finished") {
-        bgColor = 'bg-yellow-100'
-        textColor = "text-yellow-800";
-        darkBgColor = "dark:bg-yellow-900";
-        darkTextColor = "dark:text-yellow-300";
-    } else {
         bgColor = 'bg-blue-100'
         textColor = "text-blue-800";
         darkBgColor = "dark:bg-blue-900";
         darkTextColor = "dark:text-blue-300";
+    } else if (props.data === 'missed') {
+        bgColor = 'bg-amber-100'
+        textColor = "text-amber-800";
+        darkBgColor = "dark:bg-amber-900";
+        darkTextColor = "dark:text-amber-300";
+    } else {
+        bgColor = 'bg-cyan-100'
+        textColor = "text-cyan-800";
+        darkBgColor = "dark:bg-cyan-900";
+        darkTextColor = "dark:text-cyan-300";
     }
 
     const base = [

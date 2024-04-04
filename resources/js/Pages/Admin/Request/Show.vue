@@ -46,7 +46,7 @@ const props = defineProps({
                             >
                                 Visit Purpose
                             </td>
-                            <td data-label="Name">
+                            <td data-label="Visit Purpose">
                                 {{ data.visit_purpose }}
                             </td>
                         </tr>
@@ -56,7 +56,7 @@ const props = defineProps({
                             >
                                 Start Date
                             </td>
-                            <td data-label="Email">
+                            <td data-label="Start Date">
                                 {{ data.start_date }}
                             </td>
                         </tr>
@@ -66,7 +66,7 @@ const props = defineProps({
                             >
                                 End Date
                             </td>
-                            <td data-label="Created">
+                            <td data-label="End Date">
                                 {{ data.end_date }}
                             </td>
                         </tr>
@@ -76,20 +76,23 @@ const props = defineProps({
                             >
                                 QR Code
                             </td>
-                            <td data-label="Created">
-                                <img
-                                    :src="'../storage' + data.qrcode"
-                                    class="p-3 bg-white mb-3"
-                                />
-                                <BaseButton
-                                    :href="'../storage' + data.qrcode"
-                                    :icon="mdiDownload"
-                                    label="Download"
-                                    color="white"
-                                    rounded-full
-                                    small
-                                    download
-                                />
+                            <td data-label="QR Code">
+                                <div class="flex flex-col">
+                                    <img
+                                        :src="'../storage' + data.qrcode"
+                                        class="p-2 lg:p-3 bg-white mb-3 w-[200px]"
+                                    />
+                                    <BaseButton
+                                        :href="'../storage' + data.qrcode"
+                                        :icon="mdiDownload"
+                                        class="lg:w-[120px]"
+                                        label="Download"
+                                        color="white"
+                                        rounded-full
+                                        small
+                                        download
+                                    />
+                                </div>
                             </td>
                         </tr>
                     </tbody>
@@ -121,8 +124,48 @@ const props = defineProps({
                             >
                                 Identity Number (KTP / Pasport)
                             </td>
-                            <td data-label="Name">
+                            <td data-label="KTP / Passport">
                                 {{ visitor.ktp }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td
+                                class="p-4 pl-8 text-slate-500 dark:text-slate-400 hidden lg:block"
+                            >
+                                Company
+                            </td>
+                            <td data-label="Company">
+                                {{ visitor.company }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td
+                                class="p-4 pl-8 text-slate-500 dark:text-slate-400 hidden lg:block"
+                            >
+                                Occupation
+                            </td>
+                            <td data-label="Occupation">
+                                {{ visitor.occupation }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td
+                                class="p-4 pl-8 text-slate-500 dark:text-slate-400 hidden lg:block"
+                            >
+                                Email
+                            </td>
+                            <td data-label="Email">
+                                {{ visitor.email }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td
+                                class="p-4 pl-8 text-slate-500 dark:text-slate-400 hidden lg:block"
+                            >
+                                Phone
+                            </td>
+                            <td data-label="Phone">
+                                {{ visitor.phone }}
                             </td>
                         </tr>
                     </tbody>
