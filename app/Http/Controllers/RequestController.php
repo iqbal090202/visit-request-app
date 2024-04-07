@@ -41,16 +41,20 @@ class RequestController extends Controller
             $requests->latest();
         }
 
+        if (request()->has('status') && request()->input('status') !== null) {
+            $requests->where('status', request()->input('status'));
+        }
+
         $requests = $requests
             ->with('visitors')
-            ->where('status', '!=', 'finished')
+            // ->where('status', '!=', 'finished')
             ->paginate(10)
             ->onEachSide(2)
             ->appends(request()->query());
         // dd($requests);
         return Inertia::render('Admin/Request/Index', [
             'requests' => $requests,
-            'filters' => request()->all('search'),
+            'filters' => request()->all('search', 'status'),
             'can' => [
                 'create' => Auth::user()->can('request-create'),
                 'edit' => Auth::user()->can('request-edit'),
