@@ -1,11 +1,18 @@
 <script setup>
 import { Head, Link, useForm } from "@inertiajs/vue3";
-import { mdiFileMarker, mdiArrowLeftBoldOutline, mdiDownload } from "@mdi/js";
+import {
+    mdiFileMarker,
+    mdiArrowLeftBoldOutline,
+    mdiDownload,
+    mdiCheck,
+    mdiClose,
+} from "@mdi/js";
 import LayoutAuthenticated from "@/Layouts/LayoutAuthenticated.vue";
 import SectionMain from "@/Components/SectionMain.vue";
 import SectionTitleLineWithButton from "@/Components/SectionTitleLineWithButton.vue";
 import CardBox from "@/Components/CardBox.vue";
 import BaseButton from "@/Components/BaseButton.vue";
+import Badge from "@/Components/Badge.vue";
 
 const props = defineProps({
     data: {
@@ -17,6 +24,14 @@ const props = defineProps({
         default: () => ({}),
     },
 });
+
+const formAccaptance = useForm({});
+
+function acceptance(id, action) {
+    if (confirm(`Are you sure you want to ${action} this request?`)) {
+        formAccaptance.post(route(`request.acceptance`, { id, action }));
+    }
+}
 </script>
 
 <template>
@@ -28,14 +43,35 @@ const props = defineProps({
                 title="View Visit Request"
                 main
             >
-                <BaseButton
-                    :route-name="route('request.index')"
-                    :icon="mdiArrowLeftBoldOutline"
-                    label="Back"
-                    color="white"
-                    rounded-full
-                    small
-                />
+                <div class="flex flex-col-reverse lg:flex-row items-end lg:items-center gap-3">
+                    <div v-if="data.status === 'requested'" class="flex gap-3">
+                        <BaseButton
+                            label="Accept"
+                            color="info"
+                            :icon="mdiCheck"
+                            small
+                            @click="acceptance(data.id, 'accept')"
+                        />
+                        <BaseButton
+                            label="Reject"
+                            color="danger"
+                            :icon="mdiClose"
+                            small
+                            @click="acceptance(data.id, 'reject')"
+                        />
+                    </div>
+                    <div v-else>
+                        <Badge :data="data.status" />
+                    </div>
+                    <BaseButton
+                        :route-name="$page.props.urlPrevious"
+                        :icon="mdiArrowLeftBoldOutline"
+                        label="Back"
+                        color="white"
+                        rounded-full
+                        small
+                    />
+                </div>
             </SectionTitleLineWithButton>
             <CardBox class="mb-6">
                 <table>

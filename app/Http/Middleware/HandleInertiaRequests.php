@@ -44,6 +44,7 @@ class HandleInertiaRequests extends Middleware
                 'message' => fn () => $request->session()->get('message'),
                 'color' => fn () => $request->session()->get('color'),
             ],
+            'urlPrevious' => url()->previous(),
             'navigation' => [
                 'menu' => [
                     [

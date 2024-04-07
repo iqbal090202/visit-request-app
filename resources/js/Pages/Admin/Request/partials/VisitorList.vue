@@ -1,6 +1,6 @@
 <script setup>
 import {
-    mdiArrowLeftBoldOutline,
+    mdiPlus,
     mdiChevronDown,
     mdiChevronRight,
     mdiTrashCanOutline,
@@ -36,7 +36,7 @@ const visitorErrors = computed(() => {
         <h1 class="flex justify-start text-xl font-semibold">Visitor List</h1>
         <BaseButton
             @click="emit('add')"
-            :icon="mdiArrowLeftBoldOutline"
+            :icon="mdiPlus"
             label="Add Visitor"
             color="info"
             rounded

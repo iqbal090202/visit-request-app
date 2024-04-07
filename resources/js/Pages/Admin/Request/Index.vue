@@ -18,6 +18,8 @@ import Pagination from "@/Components/Admin/Pagination.vue";
 import { getPIC } from "@/utils.js";
 import Badge from "../../../Components/Badge.vue";
 import Sort from "@/Components/Admin/Sort.vue";
+import FormControl from "@/Components/FormControl.vue";
+import FormField from "@/Components/FormField.vue";
 
 const props = defineProps({
     requests: {
@@ -38,12 +40,21 @@ const form = useForm({
     search: props.filters.search,
 });
 
+const formFilter = useForm({
+    status: props.filters.status,
+});
+
 const formAccaptance = useForm({});
 
 function acceptance(id, action) {
     if (confirm(`Are you sure you want to ${action} this request?`)) {
         formAccaptance.post(route(`request.acceptance`, { id, action }));
     }
+}
+
+const clearFilter = () => {
+    formFilter.status = null
+    formFilter.get(route('request.index'))
 }
 </script>
 
@@ -69,15 +80,21 @@ function acceptance(id, action) {
             <NotificationBar
                 :key="Date.now()"
                 v-if="$page.props.flash.message"
-                :color="$page.props.flash.color == null ? 'success' : $page.props.flash.color"
+                :color="
+                    $page.props.flash.color == null
+                        ? 'success'
+                        : $page.props.flash.color
+                "
                 :icon="mdiAlertBoxOutline"
             >
                 {{ $page.props.flash.message }}
             </NotificationBar>
             <CardBox class="mb-6" has-table>
-                <form @submit.prevent="form.get(route('request.index'))">
-                    <div class="py-2 flex">
-                        <div class="flex pl-4">
+                <div class="py-2 flex flex-col lg:flex-row lg:justify-between">
+                    <div class="flex items-end pl-4">
+                        <form
+                            @submit.prevent="form.get(route('request.index'))"
+                        >
                             <input
                                 type="search"
                                 v-model="form.search"
@@ -90,9 +107,33 @@ function acceptance(id, action) {
                                 color="info"
                                 class="ml-4 inline-flex items-center px-4 py-2"
                             />
-                        </div>
+                        </form>
                     </div>
-                </form>
+
+                    <div class="flex px-4">
+                        <form
+                            @submit.prevent="
+                                formFilter.get(route('request.index'))
+                            "
+                        >
+                            <FormField label="Filter by Status">
+                                <FormControl
+                                    class="min-w-[200px]"
+                                    v-model="formFilter.status"
+                                    type="select"
+                                    :options="['requested', 'accepted', 'rejected', 'finished', 'missed']"
+                                    options-is-value
+                                    change-is-submit
+                                    :show-clear-button="formFilter.status !== null"
+                                    @clear="clearFilter"
+                                    @submitForm="
+                                        formFilter.get(route('request.index'))
+                                    "
+                                ></FormControl>
+                            </FormField>
+                        </form>
+                    </div>
+                </div>
             </CardBox>
             <CardBox class="mb-6" has-table>
                 <table>
@@ -120,10 +161,7 @@ function acceptance(id, action) {
                     </thead>
                     <tbody v-if="requests.data.length > 0">
                         <tr v-for="request in requests.data" :key="request.id">
-                            <td
-                                data-label="Start Date"
-                                @click="console.log(request)"
-                            >
+                            <td data-label="Start Date">
                                 {{ request.start_date }}
                             </td>
                             <td data-label="End Date">
