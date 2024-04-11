@@ -23,6 +23,10 @@ const { form } = defineProps({
         type: Array,
         default: () => [],
     },
+    withoutHeader: {
+        type: Boolean,
+        default: false,
+    }
 });
 
 const emit = defineEmits(["add", "delete", "toggleShow"]);
@@ -32,7 +36,7 @@ const visitorErrors = computed(() => {
 
 </script>
 <template>
-    <div class="flex justify-between">
+    <div v-if="!withoutHeader" class="flex justify-between">
         <h1 class="flex justify-start text-xl font-semibold">Visitor List</h1>
         <BaseButton
             @click="emit('add')"
@@ -80,7 +84,7 @@ const visitorErrors = computed(() => {
         </div>
 
         <div class="visitor-container">
-            <div :id="`visitorList-${index}`" class="visitor-list" :class="visitor.show && 'show'">
+            <div :id="`visitorList-${index}`" class="visitor-list p-1" :class="visitor.show && 'show'">
                 <FormField
                     label="KTP *"
                     :class="{

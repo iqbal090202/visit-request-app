@@ -73,15 +73,11 @@ class RequestController extends Controller
         return Inertia::render('Admin/Request/Create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreVisitRequest $request)
+    private function storeVisit($request)
     {
-        // dd($request->only('start_date', 'end_date'));
         $spkName = null;
         if ($request->hasFile('spk')) {
-            $spkName = time().'.'.$request->spk->extension();
+            $spkName = time() . '.' . $request->spk->extension();
             // Storage::disk('public')->putFile('/file/spk/' . $spkName, $request->spk);
             $request->spk->storeAs('spk', $spkName);
         }
@@ -95,7 +91,7 @@ class RequestController extends Controller
         ]);
         foreach ($request->visitors as $key => $visitor) {
             $ktpName = null;
-            $ktpName = time().'.'.$visitor['file_ktp']->extension();
+            $ktpName = time() . '.' . $visitor['file_ktp']->extension();
             $visitor['file_ktp']->storeAs('ktp', $ktpName);
 
             $visitorData = Visitor::create([
@@ -111,8 +107,23 @@ class RequestController extends Controller
 
             $requestData->visitors()->attach($visitorData->id);
         }
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(StoreVisitRequest $request)
+    {
+        $this->storeVisit($request);
 
         return redirect()->route('request.index')->with('message', __('Request created successfully.'));
+    }
+
+    public function formVisitStore(StoreVisitRequest $request)
+    {
+        $this->storeVisit($request);
+
+        return redirect()->route('form.visit')->with('message', __('Request created successfully.'));
     }
 
     public function acceptance(Request $request)

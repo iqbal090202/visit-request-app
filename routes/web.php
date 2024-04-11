@@ -19,6 +19,12 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('/visit-request', function () {
+    return Inertia::render('FormVisit');
+})->name('form.visit');
+
+Route::post('/visit-request', [RequestController::class, 'formVisitStore'])->name('form.visit.store');
+
 Route::get('/dashboard', DashboardController::class)->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
