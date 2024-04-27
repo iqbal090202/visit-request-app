@@ -18,4 +18,5 @@
     <body class="font-sans antialiased">
         @inertia
     </body>
+    <script src="https://unpkg.com/html5-qrcode"></script>
 </html>

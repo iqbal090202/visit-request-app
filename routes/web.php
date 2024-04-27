@@ -4,6 +4,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\ScannerController;
 use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -39,6 +40,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('user', UserController::class)->middleware(['role:superadmin', 'permission:user-list|user-create|user-edit|user-delete']);
     Route::resource('request', RequestController::class)->middleware(['role:superadmin|admin', 'permission:request-list|request-create|request-edit|request-acceptance|request-delete']);
     Route::post('/request/acceptance', [RequestController::class, 'acceptance'])->middleware(['role:superadmin|admin', 'permission:request-acceptance'])->name('request.acceptance');
+
+    Route::get('scanner', [ScannerController::class, 'index'])->name('scanner.index');
 });
 
 require __DIR__.'/auth.php';

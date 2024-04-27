@@ -54,13 +54,6 @@ class HandleInertiaRequests extends Middleware
                         'weight' => 0,
                         'icon' => 'M13,3V9H21V3M13,21H21V11H13M3,21H11V15H3M3,13H11V3H3V13Z'
                     ],
-                    // [
-                    //     'name' => 'Permissions',
-                    //     'link' => '/permission',
-                    //     'enabled' => 1,
-                    //     'weight' => 1,
-                    //     'icon' => 'M12,12H19C18.47,16.11 15.72,19.78 12,20.92V12H5V6.3L12,3.19M12,1L3,5V11C3,16.55 6.84,21.73 12,23C17.16,21.73 21,16.55 21,11V5L12,1Z'
-                    // ],
                     [
                         'name' => 'Roles',
                         'link' => '/roles',
