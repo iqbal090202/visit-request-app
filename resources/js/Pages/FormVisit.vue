@@ -62,27 +62,27 @@ const submit = () => {
 <template>
     <LayoutGuest>
         <Head title="Form" />
-        <NotificationBar
-            :key="Date.now()"
-            v-if="$page.props.flash.message"
-            :color="
-                $page.props.flash.color == null
-                    ? 'success'
-                    : $page.props.flash.color
-            "
-            :icon="mdiAlertBoxOutline"
-            class="m-5"
-        >
-            {{ $page.props.flash.message }}
-        </NotificationBar>
         <div
             class="relative min-h-screen flex flex-col items-center selection:bg-blue-500 selection:text-white"
         >
+            <NotificationBar
+                :key="Date.now()"
+                v-if="$page.props.flash.message"
+                :color="
+                    $page.props.flash.color == null
+                        ? 'success'
+                        : $page.props.flash.color
+                "
+                :icon="mdiAlertBoxOutline"
+                class="m-5 w-1/2"
+            >
+                {{ $page.props.flash.message }}
+            </NotificationBar>
             <form
                 @submit.prevent="submit"
-                class="relative w-full flex flex-col p-8"
+                class="relative w-full flex flex-col p-8 dark:bg-slate-900/70 bg-white"
             >
-                <div class="flex gap-8">
+                <div class="flex flex-col gap-8 lg:flex-row">
                     <div class="flex flex-col w-full lg:w-50">
                         <div class="border-b border-slate-400 pb-4">
                             <h1 class="text-3xl">Visit Detail</h1>
@@ -116,7 +116,7 @@ const submit = () => {
                         </div>
                     </div>
                 </div>
-                <div class="flex justify-between pt-5 border-t-2 mt-5">
+                <div class="flex flex-col lg:flex-row gap-5 justify-between pt-5 border-t-2 mt-5">
                     <div class="terms-checkbox flex items-center gap-2">
                         <input type="checkbox" v-model="terms" />
                         <span

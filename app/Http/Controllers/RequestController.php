@@ -51,7 +51,7 @@ class RequestController extends Controller
             ->paginate(10)
             ->onEachSide(2)
             ->appends(request()->query());
-        // dd($requests);
+        // dd($requests[0]->visitors);
         return Inertia::render('Admin/Request/Index', [
             'requests' => $requests,
             'filters' => request()->all('search', 'status'),
@@ -79,7 +79,9 @@ class RequestController extends Controller
         if ($request->hasFile('spk')) {
             $spkName = time() . '.' . $request->spk->extension();
             // Storage::disk('public')->putFile('/file/spk/' . $spkName, $request->spk);
-            $request->spk->storeAs('spk', $spkName);
+            $spkName = '/file/spk/' . time() . '.' . $request->spk->extension();
+            Storage::disk('public')->putFileAs('/file/spk/', $request->spk, time() . '.' . $request->spk->extension());
+            // $request->spk->storeAs('spk', $spkName);
         }
 
         $requestData = ModelsRequest::create([
@@ -90,9 +92,10 @@ class RequestController extends Controller
             'spk' => $spkName
         ]);
         foreach ($request->visitors as $key => $visitor) {
-            $ktpName = null;
-            $ktpName = time() . '.' . $visitor['file_ktp']->extension();
-            $visitor['file_ktp']->storeAs('ktp', $ktpName);
+            $ktpName = '/img/ktp/' . time() . '.' . $visitor['file_ktp']->extension();
+            Storage::disk('public')->putFileAs('/img/ktp/', $visitor['file_ktp'], time() . '.' . $visitor['file_ktp']->extension());
+            // $ktpName = time() . '.' . $visitor['file_ktp']->extension();
+            // $visitor['file_ktp']->storeAs('ktp', $ktpName);
 
             $visitorData = Visitor::create([
                 'ktp' => $visitor['ktp'],
@@ -100,7 +103,7 @@ class RequestController extends Controller
                 'file_ktp' => $ktpName,
                 'company' => $visitor['company'],
                 'occupation' => $visitor['occupation'],
-                'phone' => $visitor['phone'],
+                'phone' => '0'.$visitor['phone'],
                 'email' => $visitor['email'],
                 'pic' => $key == 0
             ]);
@@ -134,7 +137,9 @@ class RequestController extends Controller
         $requestThisDay = ModelsRequest::where('status', 'accepted')
             ->whereDate('start_date', $startDate->toDateString())
             ->whereTime('end_date', '>=', $startDate->toTimeString())
+            ->whereTime('end_date', '<=', $endDate->toTimeString())
             ->whereTime('start_date', '<=', $endDate->toTimeString())
+            ->whereTime('start_date', '>=', $startDate->toTimeString())
             ->count();
         $filename = '';
         $action = $request->action . 'ed';

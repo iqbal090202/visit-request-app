@@ -24,6 +24,7 @@ const props = defineProps({
         default: () => ({}),
     },
 });
+console.log(props.data)
 
 const formAccaptance = useForm({});
 
@@ -158,10 +159,21 @@ function acceptance(id, action) {
                             <td
                                 class="p-4 pl-8 text-slate-500 dark:text-slate-400 hidden lg:block"
                             >
-                                Identity Number (KTP / Pasport)
+                                Identity Number (KTP / Passport)
                             </td>
                             <td data-label="KTP / Passport">
                                 {{ visitor.ktp }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="p-4 pl-8 text-slate-500 dark:text-slate-400 hidden lg:block">
+                                Foto KTP / Passport
+                            </td>
+                            <td data-label="Foto KTP / Passport">
+                                <img
+                                        :src="'../storage' + visitor.file_ktp"
+                                        class="p-2 lg:p-3 bg-white mb-3 w-[200px]"
+                                    />
                             </td>
                         </tr>
                         <tr>

@@ -1,38 +1,37 @@
 import {
-  mdiAccountCircle,
-  mdiMonitor,
-  mdiGithub,
-  mdiAccountKey,
-  mdiAccountEye,
-  mdiAccountGroup,
-  mdiPalette
-} from '@mdi/js'
+    mdiMonitor,
+    mdiAccountGroup,
+    mdiOfficeBuildingMarker,
+    mdiQrcodeScan,
+} from "@mdi/js";
 
 export default [
-  {
-    route: 'dashboard',
-    icon: mdiMonitor,
-    label: 'Dashboard'
-  },
-  {
-    route: 'permission.index',
-    icon: mdiAccountKey,
-    label: 'Permissions'
-  },
-  {
-    route: 'role.index',
-    icon: mdiAccountEye,
-    label: 'Roles'
-  },
-  {
-    route: 'user.index',
-    icon: mdiAccountGroup,
-    label: 'Users'
-  },
-  {
-    href: 'https://github.com/balajidharma/laravel-vue-admin-panel',
-    label: 'GitHub',
-    icon: mdiGithub,
-    target: '_blank'
-  }
-]
+    {
+        name: "Dashboard",
+        link: "/dashboard",
+        enabled: 1,
+        weight: 0,
+        icon: mdiMonitor,
+    },
+    {
+        name: "Visit Request",
+        link: "/request",
+        enabled: 1,
+        weight: 0,
+        icon: mdiOfficeBuildingMarker,
+    },
+    {
+        name: "Users",
+        link: "/user",
+        enabled: 1,
+        weight: 0,
+        icon: mdiAccountGroup
+    },
+    {
+        name: "Scanner",
+        link: "/scanner",
+        enabled: 1,
+        weight: 0,
+        icon: mdiQrcodeScan
+    },
+];
