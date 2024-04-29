@@ -63,7 +63,7 @@ const submit = () => {
     <LayoutGuest>
         <Head title="Form" />
         <div
-            class="relative min-h-screen flex flex-col items-center selection:bg-blue-500 selection:text-white"
+            class="relative flex flex-col items-center selection:bg-blue-500 selection:text-white"
         >
             <NotificationBar
                 :key="Date.now()"
@@ -78,64 +78,82 @@ const submit = () => {
             >
                 {{ $page.props.flash.message }}
             </NotificationBar>
-            <form
-                @submit.prevent="submit"
-                class="relative w-full flex flex-col p-8 dark:bg-slate-900/70 bg-white"
-            >
-                <div class="flex flex-col gap-8 lg:flex-row">
-                    <div class="flex flex-col w-full lg:w-50">
-                        <div class="border-b border-slate-400 pb-4">
-                            <h1 class="text-3xl">Visit Detail</h1>
+            <div class="flex flex-col lg:flex-row w-full">
+                <div class="w-full h-screen lg:w-1/4 flex flex-col justify-between items-center fixed py-10 dark:bg-slate-900/70 bg-white">
+                    <div class="flex items-center gap-5">
+                        <div class="logo1">
+                            <img src="../../img/direktorat-logo.png" class="max-w-[75px] lg:max-w-[100px] inline-block rounded-full ring-2 ring-white bg-white" />
                         </div>
-                        <div class="py-4">
-                            <VisitDetail :form="form" />
+                        <div class="logo2">
+                            <img src="../../img/tu-logo.png" class="max-h-[50px] lg:max-h-[75px] bg-white rounded-md" />
                         </div>
-                    </div>
-                    <div class="w-full lg:w-50">
-                        <div
-                            class="border-b border-slate-400 pb-4 flex justify-between"
-                        >
-                            <h1 class="text-3xl">Visitor List</h1>
-                            <BaseButton
-                                @click="addVisitor"
-                                :icon="mdiPlus"
-                                label="Add Visitor"
-                                color="info"
-                                rounded
-                                small
-                            />
-                        </div>
-                        <div class="py-4 h-screen overflow-auto pr-2">
-                            <VisitorList
-                                :form="form"
-                                :visitors="dataVisitors"
-                                @delete="deleteVisitor"
-                                @toggleShow="toggleShowVisitor"
-                                without-header
-                            />
-                        </div>
-                    </div>
-                </div>
-                <div class="flex flex-col lg:flex-row gap-5 justify-between pt-5 border-t-2 mt-5">
-                    <div class="terms-checkbox flex items-center gap-2">
-                        <input type="checkbox" v-model="terms" />
-                        <span
-                            >I have read and accept the Term of Use & Privacy
-                            Policy</span
-                        >
                     </div>
                     <div>
-                        <BaseButton
-                            type="submit"
-                            :icon="mdiSend"
-                            label="Submit"
-                            color="info"
-                            :disabled="!terms"
-                            rounded
-                        />
+                        <span class="text-3xl font-semibold">Visit Request App</span>
+                    </div>
+                    <div>
+                        <img src="../../img/illustration.png" class="p-2" />
                     </div>
                 </div>
-            </form>
+                <form
+                    @submit.prevent="submit"
+                    class="relative lg:absolute lg:right-0 w-full lg:w-3/4 flex flex-col p-8 dark:bg-slate-900/70 bg-white"
+                >
+                    <div class="flex flex-col gap-8 lg:flex-row">
+                        <div class="flex flex-col w-full lg:w-50">
+                            <div class="border-b border-slate-400 pb-4">
+                                <h1 class="text-3xl">Visit Detail</h1>
+                            </div>
+                            <div class="py-4">
+                                <VisitDetail :form="form" />
+                            </div>
+                        </div>
+                        <div class="w-full lg:w-50">
+                            <div
+                                class="border-b border-slate-400 pb-4 flex justify-between"
+                            >
+                                <h1 class="text-3xl">Visitor List</h1>
+                                <BaseButton
+                                    @click="addVisitor"
+                                    :icon="mdiPlus"
+                                    label="Add Visitor"
+                                    color="info"
+                                    rounded
+                                    small
+                                />
+                            </div>
+                            <div class="py-4 h-screen overflow-auto pr-2">
+                                <VisitorList
+                                    :form="form"
+                                    :visitors="dataVisitors"
+                                    @delete="deleteVisitor"
+                                    @toggleShow="toggleShowVisitor"
+                                    without-header
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col lg:flex-row gap-5 justify-between pt-5 border-t-2 mt-5">
+                        <div class="terms-checkbox flex items-center gap-2">
+                            <input type="checkbox" v-model="terms" />
+                            <span
+                                >I have read and accept the Term of Use & Privacy
+                                Policy</span
+                            >
+                        </div>
+                        <div>
+                            <BaseButton
+                                type="submit"
+                                :icon="mdiSend"
+                                label="Submit"
+                                color="info"
+                                :disabled="!terms"
+                                rounded
+                            />
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </LayoutGuest>
 </template>

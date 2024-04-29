@@ -29,7 +29,7 @@ class StoreVisitRequest extends FormRequest
             'description' => ['required'],
             'spk' => ['nullable', 'mimes:doc,docx,pdf', 'max:2048'],
             'visitors' => ['array', 'min:1'],
-            'visitors.*.ktp' => ['required', 'unique:visitors'],
+            'visitors.*.ktp' => ['required'],
             'visitors.*.name' => ['required'],
             'visitors.*.file_ktp' => ['required', 'mimes:png,jpg,jpeg,pdf', 'max:2048'],
             'visitors.*.company' => ['required'],
@@ -43,7 +43,6 @@ class StoreVisitRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'visitors.*.ktp.unique' => 'The KTP has already been taken.',
             'visitors.*.ktp.required' => 'The KTP field is required.',
             'visitors.*.name.required' => 'The name field is required.',
             'visitors.*.file_ktp.required' => 'The File KTP field is required.',
