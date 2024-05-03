@@ -65,8 +65,8 @@ class DatabaseSeeder extends Seeder
         // seeder request & visitor
         $request1 = Request::create([
             'visit_purpose' => 'Survey',
-            'start_date' => Carbon::now()->format('Y-m-d H:i:s'),
-            'end_date' => Carbon::now()->format('Y-m-d H:i:s'),
+            'start_date' => Carbon::now()->subMonth()->format('Y-m-d H:i:s'),
+            'end_date' => Carbon::now()->subMonth()->format('Y-m-d H:i:s'),
             'description' => 'ini deskripsinya',
             'status' => 'requested'
         ]);

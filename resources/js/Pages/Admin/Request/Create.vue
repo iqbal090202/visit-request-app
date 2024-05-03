@@ -1,6 +1,6 @@
 <script setup>
 import { Head, Link, useForm } from "@inertiajs/vue3";
-import { mdiFileMarker, mdiArrowLeftBoldOutline } from "@mdi/js";
+import { mdiOfficeBuildingMarker, mdiArrowLeftBoldOutline } from "@mdi/js";
 import LayoutAuthenticated from "@/Layouts/LayoutAuthenticated.vue";
 import SectionMain from "@/Components/SectionMain.vue";
 import SectionTitleLineWithButton from "@/Components/SectionTitleLineWithButton.vue";
@@ -63,7 +63,7 @@ const submit = () => {
         <Head title="Add Visit Request" />
         <SectionMain>
             <SectionTitleLineWithButton
-                :icon="mdiFileMarker"
+                :icon="mdiOfficeBuildingMarker"
                 title="Add Visit Request"
                 main
             >

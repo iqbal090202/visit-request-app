@@ -3,6 +3,7 @@ import {
     mdiAccountGroup,
     mdiOfficeBuildingMarker,
     mdiQrcodeScan,
+    mdiChartBar
 } from "@mdi/js";
 
 export default [
@@ -33,5 +34,12 @@ export default [
         enabled: 1,
         weight: 0,
         icon: mdiQrcodeScan
+    },
+    {
+        name: "Analytic",
+        link: "/analytic",
+        enabled: 1,
+        weight: 0,
+        icon: mdiChartBar
     },
 ];

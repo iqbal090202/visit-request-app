@@ -1,6 +1,6 @@
 <script setup>
 import { Head, Link, useForm } from "@inertiajs/vue3";
-import { mdiAccountKey, mdiArrowLeftBoldOutline } from "@mdi/js";
+import { mdiAccountGroup, mdiArrowLeftBoldOutline } from "@mdi/js";
 import LayoutAuthenticated from "@/Layouts/LayoutAuthenticated.vue";
 import SectionMain from "@/Components/SectionMain.vue";
 import SectionTitleLineWithButton from "@/Components/SectionTitleLineWithButton.vue";
@@ -33,7 +33,7 @@ const form = useForm({
         <Head title="Add user" />
         <SectionMain>
             <SectionTitleLineWithButton
-                :icon="mdiAccountKey"
+                :icon="mdiAccountGroup"
                 title="Add user"
                 main
             >
