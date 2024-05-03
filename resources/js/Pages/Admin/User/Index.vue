@@ -1,7 +1,7 @@
 <script setup>
 import { Head, Link, useForm } from "@inertiajs/vue3"
 import {
-  mdiAccountKey,
+  mdiAccountGroup,
   mdiPlus,
   mdiSquareEditOutline,
   mdiTrashCan,
@@ -51,7 +51,7 @@ function destroy(id) {
     <Head title="Users" />
     <SectionMain>
       <SectionTitleLineWithButton
-        :icon="mdiAccountKey"
+        :icon="mdiAccountGroup"
         title="Users"
         main
       >

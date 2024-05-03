@@ -27,9 +27,11 @@
         "@fortawesome/free-solid-svg-icons": "^6.5.1",
         "@fortawesome/vue-fontawesome": "^3.0.6",
         "@vuepic/vue-datepicker": "^8.3.1",
+        "chart.js": "^4.4.2",
         "datatables.net": "^2.0.2",
         "datatables.net-dt": "^2.0.2",
         "datatables.net-vue3": "^3.0.1",
+        "vue-chartjs": "^5.3.1",
         "vue-qrcode-reader": "^5.5.3"
     }
 }

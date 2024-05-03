@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnalyticController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RequestController;
@@ -42,6 +43,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/request/acceptance', [RequestController::class, 'acceptance'])->middleware(['role:superadmin|admin', 'permission:request-acceptance'])->name('request.acceptance');
 
     Route::get('scanner', [ScannerController::class, 'index'])->name('scanner.index');
+
+    Route::get('analytic', AnalyticController::class)->name('analytic');
 });
 
 require __DIR__.'/auth.php';

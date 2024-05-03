@@ -1,7 +1,7 @@
 <script setup>
 import { Head } from "@inertiajs/vue3";
 import {
-    mdiAccountKey,
+    mdiQrcodeScan,
 } from "@mdi/js";
 import LayoutAuthenticated from "@/Layouts/LayoutAuthenticated.vue";
 import SectionMain from "@/Components/SectionMain.vue";
@@ -14,7 +14,7 @@ import QrCodeReader from "@/Components/QrCodeReader.vue";
     <LayoutAuthenticated>
         <Head title="Scanner" />
         <SectionMain>
-            <SectionTitleLineWithButton :icon="mdiAccountKey" title="Scan" main>
+            <SectionTitleLineWithButton :icon="mdiQrcodeScan" title="Scan" main>
             </SectionTitleLineWithButton>
 
             <QrCodeReader />

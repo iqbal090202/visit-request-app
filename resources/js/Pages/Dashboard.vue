@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import { Head } from "@inertiajs/vue3";
 import {
-    mdiChartTimelineVariant,
+    mdiMonitor,
     mdiGithub,
     mdiAccountMultiple,
     mdiClockOutline,
@@ -33,6 +33,10 @@ const props = defineProps({
         type: Array,
         default: () => [],
     },
+    dailyData: {
+        type: Array,
+        default: () => [],
+    },
 });
 
 const columnLatestRequest = ref([
@@ -40,7 +44,7 @@ const columnLatestRequest = ref([
     "End Date",
     "Visit Purpose",
     "Visitor (PIC)",
-    "Status"
+    "Status",
 ]);
 
 const columnUpcomingVisit = ref([
@@ -56,7 +60,7 @@ const columnUpcomingVisit = ref([
         <Head title="Dashboard" />
         <SectionMain>
             <SectionTitleLineWithButton
-                :icon="mdiChartTimelineVariant"
+                :icon="mdiMonitor"
                 title="Overview"
                 main
             >
@@ -70,6 +74,7 @@ const columnUpcomingVisit = ref([
                     small
                 />
             </SectionTitleLineWithButton>
+
             <div class="grid grid-cols-1 gap-6 lg:grid-cols-3 mb-6">
                 <CardBoxWidget
                     color="text-slate-600"

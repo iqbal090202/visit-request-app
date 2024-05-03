@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Request as ModelsRequest;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -15,21 +14,7 @@ class DashboardController extends Controller
      */
     public function __invoke(Request $request)
     {
-        // $daily = ModelsRequest::select(DB::raw('DATE(start_date) as visit_date'), DB::raw('COUNT(*) as visit_count'))
-        // ->groupBy('visit_date')
-        // ->get();
-
-        // $weeklyVisitData = ModelsRequest::select(DB::raw('strftime("%Y", start_date) as year'), DB::raw('strftime("%W", start_date) as week'), DB::raw('COUNT(*) as visit_count'))
-        // ->groupBy('year', 'week')
-        // ->get();
-
-        // $monthlyVisitData = ModelsRequest::select(DB::raw('strftime("%Y", start_date) as year'), DB::raw('strftime("%m", start_date) as month'), DB::raw('COUNT(*) as visit_count'))
-        // ->groupBy('year', 'month')
-        // ->get();
-        // dd($monthlyVisitData);
-
         $latestRequest = ModelsRequest::with('visitors')->latest()->take(5)->get();
-        // dd($latestRequest);
 
         $upcomingVisit = ModelsRequest::with('visitors')
             ->where('status', 'accepted')
@@ -51,7 +36,7 @@ class DashboardController extends Controller
                 'missed' => ModelsRequest::where('status', 'missed')->count()
             ],
             'latestRequest' => $latestRequest,
-            'upcomingVisit' => $upcomingVisit
+            'upcomingVisit' => $upcomingVisit,
         ]);
     }
 }

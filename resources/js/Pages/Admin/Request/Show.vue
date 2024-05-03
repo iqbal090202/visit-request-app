@@ -1,7 +1,7 @@
 <script setup>
 import { Head, Link, useForm } from "@inertiajs/vue3";
 import {
-    mdiFileMarker,
+    mdiOfficeBuildingMarker,
     mdiArrowLeftBoldOutline,
     mdiDownload,
     mdiCheck,
@@ -40,7 +40,7 @@ function acceptance(id, action) {
         <Head title="View Visit Request" />
         <SectionMain>
             <SectionTitleLineWithButton
-                :icon="mdiFileMarker"
+                :icon="mdiOfficeBuildingMarker"
                 title="View Visit Request"
                 main
             >

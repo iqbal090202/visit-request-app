@@ -1,7 +1,7 @@
 <script setup>
 import { Head, Link, useForm } from "@inertiajs/vue3";
 import {
-    mdiFileMarker,
+    mdiOfficeBuildingMarker,
     mdiPlus,
     mdiCheck,
     mdiClose,
@@ -63,7 +63,7 @@ const clearFilter = () => {
         <Head title="Visit Request" />
         <SectionMain>
             <SectionTitleLineWithButton
-                :icon="mdiFileMarker"
+                :icon="mdiOfficeBuildingMarker"
                 title="Visit Request"
                 main
             >
