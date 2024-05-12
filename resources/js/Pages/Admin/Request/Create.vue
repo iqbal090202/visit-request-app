@@ -1,5 +1,5 @@
 <script setup>
-import { Head, Link, useForm } from "@inertiajs/vue3";
+import { Head, useForm } from "@inertiajs/vue3";
 import { mdiOfficeBuildingMarker, mdiArrowLeftBoldOutline } from "@mdi/js";
 import LayoutAuthenticated from "@/Layouts/LayoutAuthenticated.vue";
 import SectionMain from "@/Components/SectionMain.vue";
@@ -13,22 +13,22 @@ import VisitorList from "./partials/VisitorList.vue";
 import { reactive } from "vue";
 
 const form = useForm({
-    visit_purpose: "Survey",
-    start_date: new Date(),
-    end_date: new Date(),
-    description: "haloo",
+    visit_purpose: "",
+    start_date: "",
+    end_date: "",
+    description: "",
     spk: null,
     visitors: [],
 });
 
 const initialVisitor = {
-    ktp: "321391203123",
-    name: "ibangg",
+    ktp: "",
+    name: "",
     file_ktp: "",
-    company: "PT ibang",
-    occupation: "CEO",
-    phone: "08192381231",
-    email: "ias@asd.sad",
+    company: "",
+    occupation: "",
+    phone: "",
+    email: "",
     show: true,
 };
 

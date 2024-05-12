@@ -14,12 +14,8 @@ const year = computed(() => new Date().getFullYear())
         <b>&copy;{{ year }}, <a
           href="https://justboil.me/"
           target="_blank"
-        >Ibanggg</a>.</b>
-        Get more with <a
-          href="https://tailwind-vue.justboil.me/"
-          target="_blank"
-          class="text-blue-600"
-        >Premium version</a>
+        >SAW Capstone</a>.</b>
+
       </div>
       <div class="md:py-2">
         <a href="https://justboil.me">

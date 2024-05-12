@@ -23,8 +23,8 @@ const props = defineProps({
 })
 
 const form = useForm({
-  email: 'superadmin@mail.com',
-  password: 'superadmin',
+  email: '',
+  password: '',
   remember: []
 })
 

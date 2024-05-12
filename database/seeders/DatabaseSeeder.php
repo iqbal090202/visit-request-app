@@ -64,7 +64,7 @@ class DatabaseSeeder extends Seeder
 
         // seeder request & visitor
         $request1 = Request::create([
-            'visit_purpose' => 'Survey',
+            'visit_purpose' => 'Data Center',
             'start_date' => Carbon::now()->subMonth()->format('Y-m-d H:i:s'),
             'end_date' => Carbon::now()->subMonth()->format('Y-m-d H:i:s'),
             'description' => 'ini deskripsinya',
@@ -83,7 +83,7 @@ class DatabaseSeeder extends Seeder
         $request1->visitors()->attach($visitor1->id);
 
         $request2 = Request::create([
-            'visit_purpose' => 'Meeting',
+            'visit_purpose' => 'Network Center',
             'start_date' => Carbon::now()->format('Y-m-d H:i:s'),
             'end_date' => Carbon::now()->format('Y-m-d H:i:s'),
             'description' => 'ini deskripsinya 2',

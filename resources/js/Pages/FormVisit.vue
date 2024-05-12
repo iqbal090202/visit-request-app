@@ -1,7 +1,6 @@
 <script setup>
-import { useStyleStore } from "@/Stores/style.js";
 import BaseButton from "@/Components/BaseButton.vue";
-import { Head, Link, useForm } from "@inertiajs/vue3";
+import { Head, useForm } from "@inertiajs/vue3";
 import { mdiPlus, mdiSend } from "@mdi/js";
 import { mdiAlertBoxOutline } from "@mdi/js";
 import VisitDetail from "./Admin/Request/partials/VisitDetail.vue";
@@ -9,8 +8,6 @@ import VisitorList from "./Admin/Request/partials/VisitorList.vue";
 import NotificationBar from "@/Components/NotificationBar.vue";
 import LayoutGuest from "@/Layouts/LayoutGuest.vue";
 import { reactive, ref } from "vue";
-
-const styleStore = useStyleStore();
 
 const form = useForm({
     visit_purpose: "",
