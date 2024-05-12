@@ -17,12 +17,9 @@ const { form } = defineProps({
 const styleStore = useStyleStore();
 
 const puposes = [
-    "Survey",
-    "Trobleshooting",
-    "Device Installation",
-    "Meeting",
-    "Operation & Maintenance",
-    "Auditing",
+    "Data Center",
+    "Network Center",
+    "Network Operation Center",
 ];
 
 const startTime = ref({ hours: 8, minutes: 0 });

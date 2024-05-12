@@ -27,7 +27,7 @@ return new class extends Migration
         Schema::create('visitors', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->char('uuid', 36);
-            $table->string('ktp')->unique();
+            $table->string('ktp');
             $table->string('name');
             $table->string('file_ktp');
             $table->string('file_nda')->nullable();

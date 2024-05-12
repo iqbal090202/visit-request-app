@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Request as ModelsRequest;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -15,7 +16,7 @@ class ScannerController extends Controller
 
     public function checkQrCode(Request $request)
     {
-        $requestData = ModelsRequest::where('uuid', $request->id)->first();
+        $requestData = ModelsRequest::where('uuid', $request->id)->whereDate('start_date', Carbon::now())->first();
 
         if (!$requestData) {
             return response()->json(['message' => 'error bos...'], 500);

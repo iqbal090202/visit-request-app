@@ -28,4 +28,15 @@ class StoreUserRequest extends FormRequest
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'The name field is required.',
+            'email.required' => 'The email field is required.',
+            'password.required' => 'The password field is required.',
+            'password.min' => 'Password length must be at least 8 characters.',
+            'password.confirmed' => 'Password do not match.'
+        ];
+    }
 }

@@ -115,7 +115,7 @@ function handleImageError() {
 
                             <div class="py-8 font-bold text-center text-sm text-black dark:text-white/70 lg:text-lg">
                                 <BaseButton
-                                    :route-name="route('login')"
+                                    :route-name="route('form.visit.store')"
                                     label="VISIT REQUEST"
                                     color="white"
                                     rounded-full

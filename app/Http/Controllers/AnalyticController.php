@@ -13,7 +13,7 @@ class AnalyticController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(Request $request)
+    public function __invoke()
     {
         $now = Carbon::now();
         if (request()->has('tren') && request()->input('tren') !== null) {
@@ -102,7 +102,7 @@ class AnalyticController extends Controller
             ->get();
 
         foreach ($requestData as $request) {
-            $date = $request->created_at->format('d');
+            $date = Carbon::parse($request->start_date)->format('d');
             $index = array_search($date, array_column($dates, 'date'));
 
             if ($index !== false) {

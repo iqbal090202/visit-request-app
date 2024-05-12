@@ -64,15 +64,6 @@ const columnUpcomingVisit = ref([
                 title="Overview"
                 main
             >
-                <BaseButton
-                    href="https://github.com/balajidharma/laravel-vue-admin-panel"
-                    target="_blank"
-                    :icon="mdiGithub"
-                    label="Star on GitHub"
-                    color="contrast"
-                    rounded-full
-                    small
-                />
             </SectionTitleLineWithButton>
 
             <div class="grid grid-cols-1 gap-6 lg:grid-cols-3 mb-6">
