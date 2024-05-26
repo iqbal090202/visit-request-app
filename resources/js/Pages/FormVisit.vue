@@ -1,7 +1,7 @@
 <script setup>
 import BaseButton from "@/Components/BaseButton.vue";
 import { Head, useForm } from "@inertiajs/vue3";
-import { mdiPlus, mdiSend } from "@mdi/js";
+import { mdiPlus, mdiSend, mdiTelevisionGuide } from "@mdi/js";
 import { mdiAlertBoxOutline } from "@mdi/js";
 import VisitDetail from "./Admin/Request/partials/VisitDetail.vue";
 import VisitorList from "./Admin/Request/partials/VisitorList.vue";
@@ -76,7 +76,7 @@ const submit = () => {
                 {{ $page.props.flash.message }}
             </NotificationBar>
             <div class="flex flex-col lg:flex-row w-full">
-                <div class="w-full lg:h-screen lg:w-1/4 flex flex-col justify-between items-center lg:fixed pt-10 gap-5 lg:py-10 dark:bg-slate-900/70 bg-white">
+                <div class="w-full lg:h-screen lg:w-1/3 flex flex-col justify-between items-center lg:fixed pt-10 gap-5 lg:py-10 dark:bg-slate-900/70 bg-white">
                     <div class="flex items-center gap-5">
                         <div class="logo1">
                             <img src="../../img/direktorat-logo.png" class="max-w-[75px] lg:max-w-[100px] inline-block rounded-full ring-2 ring-white bg-white" />
@@ -88,15 +88,26 @@ const submit = () => {
                     <div>
                         <span class="text-3xl font-semibold">Visit Request App</span>
                     </div>
+                    <div>
+                        <BaseButton
+                            href="/pdf/PANDUAN_PENGGUNAAN_APLIKASI_VISITOR_MANAGEMENT.pdf"
+                            target="_blank"
+                            :icon="mdiTelevisionGuide"
+                            label="User Manual"
+                            color="info"
+                            rounded
+                            small
+                        />
+                    </div>
                     <div class="hidden lg:flex">
-                        <img src="../../img/illustration.png" class="p-2" />
+                        <img src="../../img/illustration.png" class="p-10 pt-0" />
                     </div>
                 </div>
                 <form
                     @submit.prevent="submit"
-                    class="relative lg:left-1/4 w-full lg:w-3/4 flex flex-col p-8 dark:bg-slate-900/70 bg-white"
+                    class="relative lg:left-1/3 w-full lg:w-2/3 flex flex-col p-8 dark:bg-slate-900/70 bg-white"
                 >
-                    <div class="flex flex-col gap-8 lg:flex-row">
+                    <div class="flex flex-col gap-8">
                         <div class="flex flex-col w-full lg:w-50">
                             <div class="border-b border-slate-400 pb-4">
                                 <h1 class="text-3xl">Visit Detail</h1>

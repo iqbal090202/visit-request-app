@@ -3,7 +3,7 @@ import { ref } from "vue";
 import { Head } from "@inertiajs/vue3";
 import {
     mdiMonitor,
-    mdiGithub,
+    mdiTelevisionGuide,
     mdiAccountMultiple,
     mdiClockOutline,
     mdiClockCheckOutline,
@@ -64,6 +64,15 @@ const columnUpcomingVisit = ref([
                 title="Overview"
                 main
             >
+                <BaseButton
+                    href="/pdf/PANDUAN_PENGGUNAAN_APLIKASI_VISITOR_MANAGEMENT.pdf"
+                    target="_blank"
+                    :icon="mdiTelevisionGuide"
+                    label="User Manual"
+                    color="info"
+                    rounded
+                    small
+                />
             </SectionTitleLineWithButton>
 
             <div class="grid grid-cols-1 gap-6 lg:grid-cols-3 mb-6">
