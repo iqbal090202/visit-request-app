@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\RequestExport;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Request as ModelsRequest;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+// use Maatwebsite\Excel\Facades\Excel;
 
 class AnalyticController extends Controller
 {
     /**
      * Handle the incoming request.
      */
-    public function __invoke()
+    public function index()
     {
         $now = Carbon::now();
         if (request()->has('tren') && request()->input('tren') !== null) {
@@ -22,26 +24,10 @@ class AnalyticController extends Controller
             $filterTren = ['month' => (int) $now->month - 1, 'year' => $now->year];
         }
 
-        // if ($expiredRequests->count() > 0) {
-        //     foreach ($expiredRequests as $request) {
-        //         // $request->update([
-        //         //     'status' => 'missed'
-        //         // ]);
-        //     }
-        // }
-
-        // $daily = ModelsRequest::select(DB::raw('DATE(start_date) as visit_date'), DB::raw('COUNT(*) as visit_count'))
-        //     // ->where('status', 'requested')
-        //     ->whereYear('start_date', $filterTren['year'])
-        //     ->whereMonth('start_date', $filterTren['month'])
-        //     ->groupBy('visit_date')
-        //     ->get()->toArray();
-
-        $totalPerMonth = ModelsRequest::select(DB::raw('strftime("%Y", start_date) as year'), DB::raw('strftime("%m", start_date) as month'), DB::raw('COUNT(*) as visit_count'))
-            ->whereYear('start_date', $filterTren['year'])
+        $dataPerMonth = ModelsRequest::whereYear('start_date', $filterTren['year'])
             ->whereMonth('start_date', $filterTren['month'] + 1)
-            ->groupBy('year', 'month')
-            ->count();
+            ->with('visitors')
+            ->paginate(10);
 
         $dataByPurpose = ModelsRequest::select(DB::raw('COUNT(*) as visit_count'), DB::raw('visit_purpose'))
             ->whereYear('start_date', $filterTren['year'])
@@ -49,31 +35,9 @@ class AnalyticController extends Controller
             ->groupBy('visit_purpose')
             ->get()->toArray();
 
-        // $weeklyVisitData = ModelsRequest::select(DB::raw('strftime("%Y", start_date) as year'), DB::raw('strftime("%W", start_date) as week'), DB::raw('COUNT(*) as visit_count'))
-        // ->groupBy('year', 'week')
-        // ->get();
-
-        // $monthlyVisitData = ModelsRequest::select(DB::raw('strftime("%Y", start_date) as year'), DB::raw('strftime("%m", start_date) as month'), DB::raw('COUNT(*) as visit_count'))
-        //     ->whereYear('start_date', '2024')
-        //     ->groupBy('year', 'month')
-        //     ->get()->toArray();
-
-        // $currentMonth = date('m');
-        // $currentYear = date('Y');
-
-        // // Filter visit data for current month
-        // $currentMonthData = array_filter($daily, function ($data) use ($currentMonth, $currentYear) {
-        //     return date('m', strtotime($data['visit_date'])) == $currentMonth && date('Y', strtotime($data['visit_date'])) == $currentYear;
-        // });
-
-        // // Convert the filtered data into an array
-        // $currentMonthArray = array_values($currentMonthData);
-
-        // // Output the data for the current month
-        // dd($currentMonthArray);
         return Inertia::render('Admin/Analytic/Index', [
+            'dataPerMonth' => $dataPerMonth,
             'dailyData' => $this->getRequestDataByDate($filterTren),
-            'totalPerMonth' => $totalPerMonth,
             'dataByPurpose' => $dataByPurpose,
             'filters' => [
                 'tren' => $filterTren
@@ -111,5 +75,12 @@ class AnalyticController extends Controller
         }
 
         return $dates;
+    }
+
+    public function export(String $year, String $month)
+    {
+        $monthPlusOne = (int) $month + 1;
+        $excelName = 'report-' . $year . '-' . $monthPlusOne . '.xlsx';
+        return (new RequestExport($year, $monthPlusOne))->download($excelName);
     }
 }

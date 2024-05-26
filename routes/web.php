@@ -44,7 +44,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('scanner', [ScannerController::class, 'index'])->name('scanner.index');
 
-    Route::get('analytic', AnalyticController::class)->name('analytic');
+    Route::get('analytic', [AnalyticController::class, 'index'])->name('analytic');
+    Route::get('request-export/{year}/{month}', [AnalyticController::class, 'export'])->name('request.export');
 });
 
 require __DIR__.'/auth.php';
