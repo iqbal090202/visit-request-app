@@ -17,11 +17,4 @@ export default defineConfig({
             },
         }),
     ],
-    build: {
-        outDir: 'public/build', // Direktori output build
-        manifest: true,        // Membuat file manifest
-        rollupOptions: {
-            // ...
-        },
-    },
 });
