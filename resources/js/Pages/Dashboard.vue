@@ -65,7 +65,7 @@ const columnUpcomingVisit = ref([
                 main
             >
                 <BaseButton
-                    href="/pdf/PANDUAN_PENGGUNAAN_APLIKASI_VISITOR_MANAGEMENT.pdf"
+                    href="/pdf/PANDUAN_PENGGUNAAN_APLIKASI_VISITOR_MANAGEMENT_ADMIN.pdf"
                     target="_blank"
                     :icon="mdiTelevisionGuide"
                     label="User Manual"
