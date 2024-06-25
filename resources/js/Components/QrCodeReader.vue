@@ -64,7 +64,7 @@ async function onDetect(detectedCodes) {
     const appUrl = import.meta.env.VITE_APP_URL;
     try {
         loading.value = true;
-        const response = await fetch(`${appUrl}/api/check-qrcode`, {
+        const response = await fetch(`${appUrl}api/check-qrcode`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
