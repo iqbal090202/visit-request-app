@@ -16,6 +16,7 @@ class ScannerController extends Controller
 
     public function checkQrCode(Request $request)
     {
+        return response()->json(['message' => $request->id]);
         $requestData = ModelsRequest::where('uuid', $request->id)->whereDate('start_date', Carbon::now()->toDateString())->first();
 
         if (!$requestData) {
