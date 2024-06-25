@@ -77,11 +77,8 @@ class RequestController extends Controller
     {
         $spkName = null;
         if ($request->hasFile('spk')) {
-            $spkName = time() . '.' . $request->spk->extension();
-            // Storage::disk('public')->putFile('/file/spk/' . $spkName, $request->spk);
-            $spkName = '/file/spk/' . time() . '.' . $request->spk->extension();
-            Storage::disk('public')->putFileAs('/file/spk/', $request->spk, time() . '.' . $request->spk->extension());
-            // $request->spk->storeAs('spk', $spkName);
+            $spkName = '/file/spk/' . time() . '.' . $request['spk']->extension();
+            Storage::disk('public')->putFileAs('/file/spk/', $request['spk'], time() . '.' . $request['spk']->extension());
         }
 
         $requestData = ModelsRequest::create([
@@ -94,8 +91,6 @@ class RequestController extends Controller
         foreach ($request->visitors as $key => $visitor) {
             $ktpName = '/img/ktp/' . time() . '.' . $visitor['file_ktp']->extension();
             Storage::disk('public')->putFileAs('/img/ktp/', $visitor['file_ktp'], time() . '.' . $visitor['file_ktp']->extension());
-            // $ktpName = time() . '.' . $visitor['file_ktp']->extension();
-            // $visitor['file_ktp']->storeAs('ktp', $ktpName);
 
             $visitorData = Visitor::create([
                 'ktp' => $visitor['ktp'],

@@ -107,6 +107,35 @@ function acceptance(id, action) {
                                 {{ data.end_date }}
                             </td>
                         </tr>
+                        <tr>
+                            <td
+                                class="p-4 pl-8 text-slate-500 dark:text-slate-400 hidden lg:block"
+                            >
+                                Description
+                            </td>
+                            <td data-label="Description">
+                                {{ data.description }}
+                            </td>
+                        </tr>
+                        <tr v-if="data.spk">
+                            <td
+                                class="p-4 pl-8 text-slate-500 dark:text-slate-400 hidden lg:block"
+                            >
+                                SPK/Surat Izin/Surat Tugas
+                            </td>
+                            <td data-label="spk">
+                                <BaseButton
+                                    :href="'../storage' + data.spk"
+                                    :icon="mdiDownload"
+                                    class="lg:w-[120px]"
+                                    label="Download"
+                                    color="white"
+                                    rounded-full
+                                    small
+                                    download
+                                />
+                            </td>
+                        </tr>
                         <tr v-if="data.qrcode">
                             <td
                                 class="p-4 pl-8 text-slate-500 dark:text-slate-400 hidden lg:block"

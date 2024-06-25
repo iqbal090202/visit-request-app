@@ -21,7 +21,8 @@ class Request extends Model
         'visit_purpose',
         'description',
         'qrcode',
-        'status'
+        'status',
+        'spk'
     ];
 
     public function visitors(): BelongsToMany

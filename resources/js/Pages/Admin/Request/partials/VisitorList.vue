@@ -86,7 +86,7 @@ const visitorErrors = computed(() => {
         <div class="visitor-container">
             <div :id="`visitorList-${index}`" class="visitor-list p-1" :class="visitor.show && 'show'">
                 <FormField
-                    label="KTP *"
+                    label="NIK / KTP *"
                     :class="{
                         'text-red-400': form.errors[`visitors.${index}.ktp`],
                     }"
@@ -94,7 +94,7 @@ const visitorErrors = computed(() => {
                     <FormControl
                         v-model="visitor.ktp"
                         type="number"
-                        placeholder="Enter KTP"
+                        placeholder="Enter NIK / KTP"
                         :error="form.errors[`visitors.${index}.ktp`]"
                     >
                         <div
