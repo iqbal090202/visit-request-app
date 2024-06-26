@@ -119,7 +119,7 @@ const disabledEndDate = computed(() => form.start_date === "");
         <FormFilePicker
             v-model="form.spk"
             @update:model-value="form.spk = $event.target.files[0]"
-            accept=".pdf, .doc, .docx"
+            accept=".pdf"
         ></FormFilePicker>
         <progress
             v-if="form.progress"
@@ -133,6 +133,9 @@ const disabledEndDate = computed(() => form.start_date === "");
             v-if="form.errors.spk"
         >
             {{ form.errors.spk }}
+        </div>
+        <div class="text-gray-400 text-sm">
+            Format file yang didukung: PDF
         </div>
     </FormField>
 </template>

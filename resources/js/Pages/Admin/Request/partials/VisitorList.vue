@@ -91,6 +91,7 @@ const visitorErrors = computed(() => {
                         'text-red-400': form.errors[`visitors.${index}.ktp`],
                     }"
                 >
+
                     <FormControl
                         v-model="visitor.ktp"
                         type="number"
@@ -144,6 +145,9 @@ const visitorErrors = computed(() => {
                         v-if="form.errors[`visitors.${index}.file_ktp`]"
                     >
                         {{ form.errors[`visitors.${index}.file_ktp`] }}
+                    </div>
+                    <div class="text-gray-400 text-sm">
+                        Format file yang didukung: JPG/PNG
                     </div>
                 </FormField>
 
