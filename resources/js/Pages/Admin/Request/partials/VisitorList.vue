@@ -138,7 +138,7 @@ const visitorErrors = computed(() => {
                     <FormFilePicker
                         v-model="visitor.file_ktp"
                         @update:model-value="visitor.file_ktp = $event.target.files[0]"
-                        accept=".pdf, .jpg, .jpeg, .png"
+                        accept=".jpg, .jpeg, .png"
                     ></FormFilePicker>
                     <div
                         class="text-red-400 text-sm"
