@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules;
+use Illuminate\Validation\Rules\File;
 
 class StoreVisitRequest extends FormRequest
 {
@@ -27,11 +28,11 @@ class StoreVisitRequest extends FormRequest
             'start_date' => ['required'],
             'end_date' => ['required'],
             'description' => ['required'],
-            'spk' => ['nullable', 'mimes:doc,docx,pdf', 'max:2048'],
+            'spk' => ['nullable', File::types(['pdf'])->max('250kb')],
             'visitors' => ['array', 'min:1'],
             'visitors.*.ktp' => ['required'],
             'visitors.*.name' => ['required'],
-            'visitors.*.file_ktp' => ['required', 'mimes:png,jpg,jpeg,pdf', 'max:2048'],
+            'visitors.*.file_ktp' => ['required', File::types(['png','jpg','jpeg'])->max('250kb')],
             'visitors.*.company' => ['required'],
             'visitors.*.occupation' => ['required'],
             'visitors.*.phone' => ['required'],
@@ -43,9 +44,11 @@ class StoreVisitRequest extends FormRequest
     public function messages(): array
     {
         return [
+            'spk.max' => 'The maximum allowed file size is 250KB.',
             'visitors.*.ktp.required' => 'The KTP field is required.',
             'visitors.*.name.required' => 'The name field is required.',
             'visitors.*.file_ktp.required' => 'The File KTP field is required.',
+            'visitors.*.file_ktp.max' => 'The maximum allowed file size is 250KB.',
             'visitors.*.company.required' => 'The company field is required.',
             'visitors.*.occupation.required' => 'The occupation field is required.',
             'visitors.*.phone.required' => 'The phone field is required.',
