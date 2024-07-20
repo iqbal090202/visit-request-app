@@ -44,6 +44,10 @@ class StoreVisitRequest extends FormRequest
     public function messages(): array
     {
         return [
+            'visit_purpose' => 'The visit purpose field is required.',
+            'start_date' => 'The start date field is required.',
+            'end_date' => 'The end date field is required.',
+            'description' => 'The description field is required.',
             'spk.max' => 'The maximum allowed file size is 250KB.',
             'visitors.*.ktp.required' => 'The KTP field is required.',
             'visitors.*.name.required' => 'The name field is required.',
