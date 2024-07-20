@@ -140,6 +140,13 @@ const visitorErrors = computed(() => {
                         @update:model-value="visitor.file_ktp = $event.target.files[0]"
                         accept=".jpg, .jpeg, .png"
                     ></FormFilePicker>
+                    <progress
+                        v-if="form.progress"
+                        :value="form.progress.percentage"
+                        max="100"
+                    >
+                        {{ form.progress.percentage }}%
+                    </progress>
                     <div
                         class="text-red-400 text-sm"
                         v-if="form.errors[`visitors.${index}.file_ktp`]"
