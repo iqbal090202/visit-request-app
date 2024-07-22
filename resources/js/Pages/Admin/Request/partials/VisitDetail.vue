@@ -137,5 +137,8 @@ const disabledEndDate = computed(() => form.start_date === "");
         <div class="text-gray-400 text-sm">
             Format file yang didukung: PDF
         </div>
+        <div class="text-gray-400 text-sm">
+            Max 250KB
+        </div>
     </FormField>
 </template>

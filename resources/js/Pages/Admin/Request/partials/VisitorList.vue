@@ -156,6 +156,9 @@ const visitorErrors = computed(() => {
                     <div class="text-gray-400 text-sm">
                         Format file yang didukung: JPG/PNG
                     </div>
+                    <div class="text-gray-400 text-sm">
+                        Max 250KB
+                    </div>
                 </FormField>
 
                 <FormField
