@@ -144,10 +144,7 @@ const submit = () => {
                     <div class="flex flex-col lg:flex-row gap-5 justify-between pt-5 border-t-2 mt-5">
                         <div class="terms-checkbox flex items-center gap-2">
                             <input type="checkbox" v-model="terms" />
-                            <span
-                                >I have read and accept the Term of Use & Privacy
-                                Policy</span
-                            >
+                            <span>I have entered the data correctly</span>
                         </div>
                         <div>
                             <BaseButton
