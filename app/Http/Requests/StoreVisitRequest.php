@@ -36,7 +36,7 @@ class StoreVisitRequest extends FormRequest
             'visitors.*.company' => ['required'],
             'visitors.*.occupation' => ['required'],
             'visitors.*.phone' => ['required'],
-            'visitors.*.email' => ['required'],
+            'visitors.*.email' => ['required', 'ends_with:gmail.com'],
             // 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
         ];
     }
@@ -57,6 +57,7 @@ class StoreVisitRequest extends FormRequest
             'visitors.*.occupation.required' => 'The occupation field is required.',
             'visitors.*.phone.required' => 'The phone field is required.',
             'visitors.*.email.required' => 'The email field is required.',
+            'visitors.*.email.ends_with' => 'The email must be @gmail.com.',
         ];
     }
 }

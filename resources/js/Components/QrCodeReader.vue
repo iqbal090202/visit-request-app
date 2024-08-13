@@ -8,6 +8,7 @@
 
         <div style="border: 2px solid black" class="m-5 h-[500px]">
             <qrcode-stream
+                :paused="paused"
                 :track="paintBoundingBox"
                 @detect="onDetect"
                 @error="onError"
@@ -23,6 +24,7 @@ import { QrcodeStream } from "vue-qrcode-reader";
 const result = ref("");
 const error = ref("");
 const loading = ref(false);
+const paused = ref(false);
 
 function paintBoundingBox(detectedCodes, ctx) {
     for (const detectedCode of detectedCodes) {
@@ -72,6 +74,10 @@ async function onDetect(detectedCodes) {
         });
         const res = await response.json();
 
+        paused.value = true
+        await timeout(500)
+        paused.value = false
+
         loading.value = false;
         if (response.status !== 200) {
             throw new Error(res.message);
@@ -80,6 +86,12 @@ async function onDetect(detectedCodes) {
     } catch (error) {
         result.value = error;
     }
+}
+
+function timeout(ms) {
+    return new Promise((resolve) => {
+        window.setTimeout(resolve, ms)
+    })
 }
 </script>
 

@@ -22,10 +22,6 @@ class ScannerController extends Controller
             return response()->json(['message' => 'data tidak ada...'], 500);
         }
 
-        if ($requestData->status != 'accepted') {
-            return response()->json(['message' => 'udah masuk bos...'], 500);
-        }
-
         $requestStartDate = Carbon::parse($requestData->start_date);
         $diffStartDate = $requestStartDate->diffInHours(Carbon::now());
 
@@ -40,9 +36,11 @@ class ScannerController extends Controller
             return response()->json(['message' => 'udah lewat...'], 500);
         }
 
-        $requestData->update([
-            'status' => 'finished'
-        ]);
+        if ($requestData->status == 'accepted') {
+            $requestData->update([
+                'status' => 'finished'
+            ]);
+        }
 
         return response()->json(['message' => 'Silahkan Masuk']);
     }
